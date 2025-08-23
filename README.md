@@ -1,4 +1,4 @@
-# LIBRERIA-AKY
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,103 +20,103 @@
 </head>
 <body>
 
-<header>
-  <h1>LIBRERÍA AKY</h1>
-  <p>Los mejores precios más cerca de ti</p>
-</header>
+  <header>
+    <h1>LIBRERÍA AKY</h1>
+    <p>Los mejores precios más cerca de ti</p>
+  </header>
 
-<section class="product">
-  <img src="https://via.placeholder.com/400x300.png?text=Pañitos+Húmedos" alt="Pañitos Húmedos">
-  <h2>Pañitos Húmedos</h2>
-  <p><del>S/ 4.00</del> <strong>Oferta: S/ 2.00</strong></p>
-  <button onclick="addToCart()">Agregar al carrito</button>
-</section>
+  <section class="product">
+    <h2>Pañitos Húmedos</h2>
+    <img src="https://via.placeholder.com/300x200.png?text=Pañitos+Húmedos" alt="Pañitos Húmedos">
+    <p><del>S/ 4.00</del> <strong>Oferta: S/ 2.00</strong></p>
+    <button onclick="addToCart()">Agregar al carrito</button>
+  </section>
 
-<section id="cart">
-  <h2>🛒 Carrito</h2>
-  <div id="cart-items"></div>
-  <p><strong>Subtotal:</strong> S/ <span id="subtotal">0.00</span></p>
+  <section id="cart">
+    <h2>🛒 Carrito</h2>
+    <div id="cart-items">Tu carrito está vacío</div>
+    <p>Subtotal: S/ <span id="subtotal">0.00</span></p>
 
-  <label for="distrito">Distrito de entrega</label>
-  <select id="distrito" onchange="updateDelivery()">
-    <option value="">-- Selecciona --</option>
-    <option value="Nuevo Chimbote">Nuevo Chimbote (S/ 4.00)</option>
-    <option value="Chimbote Centro">Chimbote Centro (S/ 6.00)</option>
-    <option value="Otros distritos">Otros distritos (S/ 10.00)</option>
-  </select>
+    <label for="distrito">Distrito de entrega</label>
+    <select id="distrito" onchange="updateDelivery()">
+      <option>-- Selecciona --</option>
+      <option>Nuevo Chimbote</option>
+      <option>Chimbote Centro</option>
+      <option>Otros distritos</option>
+    </select>
 
-  <label for="direccion">Dirección de entrega</label>
-  <input type="text" id="direccion" placeholder="Ej. Av. Perú 123">
+    <label for="direccion">Dirección de entrega</label>
+    <input id="direccion" type="text" placeholder="Ej. Av. Pacífico 123">
 
-  <label for="referencia">Referencia</label>
-  <input type="text" id="referencia" placeholder="Ej. Frente al parque">
+    <label for="referencia">Referencia</label>
+    <input id="referencia" type="text" placeholder="Ej. Frente al parque">
 
-  <p><strong>Costo delivery:</strong> S/ <span id="delivery">0.00</span></p>
-  <p><strong>Total:</strong> S/ <span id="total">0.00</span></p>
+    <p>Costo delivery: S/ <span id="delivery">0.00</span></p>
+    <p><strong>Total: S/ <span id="total">0.00</span></strong></p>
 
-  <div class="checkout">
-    <button onclick="checkoutWhatsApp()">📲 Consultar por WhatsApp</button>
-    <button onclick="checkoutMercadoPago()">💳 Pagar en línea (Mercado Pago)</button>
-  </div>
-</section>
+    <div class="checkout">
+      <button onclick="checkoutWhatsApp()">📲 Consultar por WhatsApp</button>
+      <button onclick="checkoutMercadoPago()">💳 Pagar en línea (Mercado Pago)</button>
+    </div>
+  </section>
 
-<script>
-  let cart = [];
-  let deliveryCost = 0;
+  <script>
+    let cart = [];
+    let deliveryCost = 0;
 
-  function addToCart() {
-    cart.push({ name: "Pañitos Húmedos", price: 2.00 });
-    renderCart();
-  }
+    function addToCart() {
+      cart.push({ name: "Pañitos Húmedos", price: 2.00 });
+      renderCart();
+    }
 
-  function renderCart() {
-    let itemsHtml = "";
-    let subtotal = 0;
-    cart.forEach((item, i) => {
-      itemsHtml += `<p>${item.name} - S/ ${item.price.toFixed(2)}</p>`;
-      subtotal += item.price;
-    });
-    document.getElementById("cart-items").innerHTML = itemsHtml || "<p>Tu carrito está vacío</p>";
-    document.getElementById("subtotal").innerText = subtotal.toFixed(2);
-    updateDelivery();
-  }
+    function renderCart() {
+      let itemsHtml = "";
+      let subtotal = 0;
+      cart.forEach((item) => {
+        itemsHtml += `<p>${item.name} - S/ ${item.price.toFixed(2)}</p>`;
+        subtotal += item.price;
+      });
+      document.getElementById("cart-items").innerHTML = itemsHtml || "<p>Tu carrito está vacío</p>";
+      document.getElementById("subtotal").innerText = subtotal.toFixed(2);
+      updateDelivery();
+    }
 
-  function updateDelivery() {
-    const distrito = document.getElementById("distrito").value;
-    if (distrito === "Nuevo Chimbote") deliveryCost = 4;
-    else if (distrito === "Chimbote Centro") deliveryCost = 6;
-    else if (distrito === "Otros distritos") deliveryCost = 10;
-    else deliveryCost = 0;
+    function updateDelivery() {
+      const distrito = document.getElementById("distrito").value;
+      if (distrito === "Nuevo Chimbote") deliveryCost = 4;
+      else if (distrito === "Chimbote Centro") deliveryCost = 6;
+      else if (distrito === "Otros distritos") deliveryCost = 10;
+      else deliveryCost = 0;
 
-    const subtotal = parseFloat(document.getElementById("subtotal").innerText);
-    document.getElementById("delivery").innerText = deliveryCost.toFixed(2);
-    document.getElementById("total").innerText = (subtotal + deliveryCost).toFixed(2);
-  }
+      const subtotal = parseFloat(document.getElementById("subtotal").innerText);
+      document.getElementById("delivery").innerText = deliveryCost.toFixed(2);
+      document.getElementById("total").innerText = (subtotal + deliveryCost).toFixed(2);
+    }
 
-  function checkoutWhatsApp() {
-    const subtotal = document.getElementById("subtotal").innerText;
-    const delivery = document.getElementById("delivery").innerText;
-    const total = document.getElementById("total").innerText;
-    const direccion = document.getElementById("direccion").value;
-    const referencia = document.getElementById("referencia").value;
-    const distrito = document.getElementById("distrito").value;
+    function checkoutWhatsApp() {
+      const subtotal = document.getElementById("subtotal").innerText;
+      const delivery = document.getElementById("delivery").innerText;
+      const total = document.getElementById("total").innerText;
+      const direccion = document.getElementById("direccion").value;
+      const referencia = document.getElementById("referencia").value;
+      const distrito = document.getElementById("distrito").value;
 
-    let mensaje = `Hola, quiero hacer un pedido:%0A`;
-    cart.forEach(item => {
-      mensaje += `- ${item.name} S/ ${item.price.toFixed(2)}%0A`;
-    });
-    mensaje += `Subtotal: S/ ${subtotal}%0A`;
-    mensaje += `Delivery (${distrito}): S/ ${delivery}%0A`;
-    mensaje += `Total: S/ ${total}%0A`;
-    mensaje += `Dirección: ${direccion}%0AReferencia: ${referencia}`;
+      let mensaje = `Hola, quiero hacer un pedido:%0A`;
+      cart.forEach(item => {
+        mensaje += `- ${item.name} S/ ${item.price.toFixed(2)}%0A`;
+      });
+      mensaje += `Subtotal: S/ ${subtotal}%0A`;
+      mensaje += `Delivery (${distrito}): S/ ${delivery}%0A`;
+      mensaje += `Total: S/ ${total}%0A`;
+      mensaje += `Dirección: ${direccion}%0AReferencia: ${referencia}`;
 
-    window.open(`https://wa.me/51918413584?text=${mensaje}`, "_blank");
-  }
+      window.open(`https://wa.me/51918413584?text=${mensaje}`, "_blank");
+    }
 
-  function checkoutMercadoPago() {
-    alert("Aquí iría la integración con Mercado Pago (requiere backend).");
-  }
-</script>
+    function checkoutMercadoPago() {
+      alert("Aquí iría la integración con Mercado Pago (requiere backend).");
+    }
+  </script>
 
 </body>
 </html>
